@@ -1,5 +1,5 @@
 
-package entidades;
+package pruebatransversal.entidades;
 
 import java.time.LocalDate;
 
@@ -9,6 +9,7 @@ public class Alumno {
     private LocalDate fechNac;
     private int legajo,idAlumno;
     boolean estado;
+    
     public Alumno() {    //Constructor
     }
 

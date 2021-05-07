@@ -1,5 +1,5 @@
 
-package modelo;
+package pruebatransversal.modelo;
 
 import java.sql.*;
 import javax.swing.JOptionPane;

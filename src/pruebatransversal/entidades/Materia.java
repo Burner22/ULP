@@ -1,5 +1,5 @@
 
-package entidades;
+package pruebatransversal.entidades;
 
 public class Materia {
     String nombre;

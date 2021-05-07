@@ -1,8 +1,8 @@
 
-package pruebatransversal;
+package pruebatransversal.principal;
 
 import java.sql.Connection;
-import modelo.Conexion;
+import pruebatransversal.modelo.Conexion;
 
 public class PruebaTransversal {
 
