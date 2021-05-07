@@ -2,19 +2,17 @@
 package entidades;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import javax.swing.JOptionPane;
 
 
 public class Alumno {
     private String nombre, apellido;
     private LocalDate fechNac;
-    private int legajo, estado, idAlumno;
-
+    private int legajo,idAlumno;
+    boolean estado;
     public Alumno() {    //Constructor
     }
 
-    public Alumno(String nombre, String apellido, LocalDate fechNac, int legajo, int estado) { //Constructor sin id_alumno
+    public Alumno(String nombre, String apellido, LocalDate fechNac, int legajo, boolean estado) { //Constructor sin id_alumno
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechNac = fechNac;
@@ -22,7 +20,7 @@ public class Alumno {
         this.estado = estado;
     }
 
-    public Alumno(String nombre, String apellido, LocalDate fechNac, int legajo, int estado, int idAlumno) {  //Constructor con id_alumno
+    public Alumno(String nombre, String apellido, LocalDate fechNac, int legajo, boolean estado, int idAlumno) {  //Constructor con id_alumno
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechNac = fechNac;
@@ -71,11 +69,11 @@ public class Alumno {
         this.legajo = legajo;
     }
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

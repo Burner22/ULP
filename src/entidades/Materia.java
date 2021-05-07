@@ -3,18 +3,19 @@ package entidades;
 
 public class Materia {
     String nombre;
-    int  año, estado, idMateria;
-
+    int  año, idMateria;
+    boolean estado;
+    
     public Materia() {
     }
     
-    public Materia(String nombre, int año, int estado) {
+    public Materia(String nombre, int año, boolean estado) {
         this.nombre = nombre;
         this.año = año;
         this.estado = estado;
     }
 
-    public Materia(String nombre, int año, int estado, int idMateria) {
+    public Materia(String nombre, int año, boolean estado, int idMateria) {
         this.nombre = nombre;
         this.año = año;
         this.estado = estado;
@@ -37,11 +38,11 @@ public class Materia {
         this.año = año;
     }
 
-    public int getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
