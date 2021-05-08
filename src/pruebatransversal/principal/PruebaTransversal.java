@@ -10,7 +10,7 @@ public class PruebaTransversal {
         Conexion con = new Conexion ();
         
         Connection c = con.getConnection();
-        
+    
     }
     
 }
