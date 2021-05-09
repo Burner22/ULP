@@ -17,11 +17,15 @@ public class Conexion {
             try{
                Class.forName("org.mariadb.jdbc.Driver"); //2° Paso: Declaro driver que se va a usar
                con = (Connection) DriverManager.getConnection(url, user, pass); //3° Paso: Establezco Conexion
-
             }
-            catch(SQLException | ClassNotFoundException e){
-                JOptionPane.showMessageDialog(null, "Error de Conexion"); //Si no establece conexion larga excepcion
-            } 
+            
+            catch(ClassNotFoundException e){
+                JOptionPane.showMessageDialog(null, "Error de drivers de conexion"); 
+            }
+            catch(SQLException e){      
+                JOptionPane.showMessageDialog(null, "Error de conexion"); //Si no establece conexion larga excepcion              
+            }       
+                  
         }
        return con; 
     }
