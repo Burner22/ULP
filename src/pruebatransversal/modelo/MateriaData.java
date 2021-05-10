@@ -96,22 +96,22 @@ public class MateriaData {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
-     public void actualizarEstadoMateria (Materia materia){  //para actualizar el estado, para no eliminar
-        String sql = "UPDATE materia SET estado = ? WHERE idMateria = ?"; 
-                                //se actualiza solo el estado de la materia
-        try {                      
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
- 
-            
-             ps.setBoolean(1, materia.getEstado());
-             ps.setInt(2, materia.getIdMateria());     
-             
-             ps.executeUpdate(); 
-                   
-         } catch (SQLException ex) {
-             Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }
+//     public void actualizarEstadoMateria (Materia materia){  //para actualizar el estado, para no eliminar
+//        String sql = "UPDATE materia SET estado = ? WHERE idMateria = ?"; 
+//                                //se actualiza solo el estado de la materia
+//        try {                      
+//             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+// 
+//            
+//             ps.setBoolean(1, materia.getEstado());
+//             ps.setInt(2, materia.getIdMateria());     
+//             
+//             ps.executeUpdate(); 
+//                   
+//         } catch (SQLException ex) {
+//             Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+//    }
     
     
     
