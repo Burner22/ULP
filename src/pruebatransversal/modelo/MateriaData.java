@@ -16,10 +16,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import pruebatransversal.entidades.Materia;
 
-/**
- *
- * @author Fiero-Sama
- */
 public class MateriaData {
     Connection con;//conexion a base de datos
     
@@ -55,7 +51,8 @@ public class MateriaData {
             JOptionPane.showMessageDialog(null, "No se pudo agregar la Materia");
         }
     }
-       public ArrayList <Materia> obtenerMaterias(){
+    
+    public ArrayList <Materia> obtenerMaterias(){
         ArrayList <Materia> materias = new ArrayList <>();
         String sql = "SELECT * FROM materia"; //todo lo que tenga materia
         
@@ -70,9 +67,9 @@ public class MateriaData {
                aux.setNombre(rs.getString(2));
                aux.setIdMateria(rs.getInt(3));
                aux.setEstado(rs.getBoolean(6)); 
-               materias.add(aux);
-               
-             }      
+               materias.add(aux);              
+             }  
+             ps.close();
          } catch (SQLException ex) {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -91,12 +88,30 @@ public class MateriaData {
                  
              
              ps.executeUpdate(); 
-                   
+             ps.close();      
          } catch (SQLException ex) {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
-     public void actualizarEstadoMateria (Materia materia){  //para actualizar el estado, para no eliminar
+     
+    public void borrarMateria (int id){
+        String sql = "DELETE FROM materia WHERE idMateria=?";
+             
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
+            ps.setInt(1, id);
+             
+            ps.executeUpdate();
+            ps.close();
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                     
+    }
+    
+  /*  public void actualizarEstadoMateria (Materia materia){  //para actualizar el estado, para no eliminar
         String sql = "UPDATE materia SET estado = ? WHERE idMateria = ?"; 
                                 //se actualiza solo el estado de la materia
         try {                      
@@ -111,7 +126,8 @@ public class MateriaData {
          } catch (SQLException ex) {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }
+    }  */
+    
     
     
     
