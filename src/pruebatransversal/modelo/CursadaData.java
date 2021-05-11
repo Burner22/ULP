@@ -69,7 +69,7 @@ public class CursadaData {
         }
         return cursadas;
     }
-/*
+/*d
     public ArrayList <Cursada> obtenerCursadasXAlumno(int id){
          
     }
