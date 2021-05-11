@@ -22,7 +22,7 @@ import pruebatransversal.entidades.Materia;
  */
 public class MateriaData {
     Connection con;//conexion a base de datos
-    
+    //Probando push.
     public MateriaData(Conexion c){//conexion a la base de datos
         con = c.getConnection();
     }
