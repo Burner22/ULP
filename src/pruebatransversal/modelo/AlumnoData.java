@@ -11,7 +11,7 @@ import pruebatransversal.entidades.Alumno;
                                                     //.executeUpdate = Agregar, Modificar, Eliminar
                                                     //.executeQuery = para extraccion y consulta de datos
 public class AlumnoData {
-    Connection con;
+    private Connection con;
 
     public AlumnoData(Conexion c) {     //a la instancia de alumnoData le paso por parametro la conexion creada en la clase "Conexion"
         con = c.getConnection();
@@ -74,7 +74,7 @@ public class AlumnoData {
             }
             else{
                 JOptionPane.showMessageDialog(null, "No se ha encontrado dicho alumno");
-            } 
+            }
             ps.close();
         }
         catch(HeadlessException | SQLException e){
@@ -87,7 +87,7 @@ public class AlumnoData {
     public ArrayList<Alumno> obtenerAlumnos(){
         ArrayList <Alumno> alumnos = new ArrayList <>();
         Alumno alumno = null;           //alumno nuevo vacio
-        String sql = "SELECT * FROM alumno"; //No hace falta signos de pregunta porque queremos traer todos los alumnos de la lista
+        String sql = "SELECT * FROM alumno"; //No hace falta una condicion WHERE porque queremos traer todos los alumnos de la lista
         
          try {
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -103,7 +103,7 @@ public class AlumnoData {
                 alumno.setLegajo(rs.getInt(5));
                 alumno.setEstado(rs.getBoolean(6)); 
                 alumnos.add(alumno);
-             }  
+             }
              ps.close();
          } catch (SQLException ex) {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,12 +126,28 @@ public class AlumnoData {
              
              ps.executeUpdate(); 
              ps.close();
-                   
          } catch (SQLException ex) {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+    
+    public void actualizarEstadoAlumno (Alumno alumno){  //para actualizar el estado del alumno, para no eliminarlo 
+       String sql = "UPDATE alumno SET estado = ? WHERE idAlumno = ?"; 
+                               //se actualiza solo el estado del alumno 
+        try {                      
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
+            
+           ps.setBoolean(1, alumno.getEstado());
+            ps.setInt(2, alumno.getIdAlumno());     
+           
+            ps.executeUpdate(); 
+                   
+        } catch (SQLException ex) {
+             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void borrarAlumno (int id){
         String sql = "DELETE FROM alumno WHERE idAlumno=?";
         
@@ -141,27 +157,11 @@ public class AlumnoData {
              ps.setInt(1, id);
              
              ps.executeUpdate();
-             ps.close();
              
+             ps.close();
          } catch (SQLException ex) {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }          
     }
-    
-  /*  public void actualizarEstadoAlumno (Alumno alumno){  //para actualizar el estado del alumno, para no eliminarlo 
-        String sql = "UPDATE alumno SET estado = ? WHERE idAlumno = ?"; 
-                                //se actualiza solo el estado del alumno 
-        try {                      
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-    
-             ps.setBoolean(1, alumno.getEstado());
-             ps.setInt(2, alumno.getIdAlumno());     
-             
-             ps.executeUpdate(); 
-                   
-         } catch (SQLException ex) {
-             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    }  */
     
 }
