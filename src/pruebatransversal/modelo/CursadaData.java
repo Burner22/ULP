@@ -159,7 +159,7 @@ public class CursadaData {
     }
 
     public void borrarCursadaDeUnaMateriaDeUnAlumno (int idAlumno, int idMateria){
-        String sql = "DELETE FROM cursada WHERE idAlumno=?,idMateria=?";
+        String sql = "DELETE FROM cursada WHERE cursada.idAlumno=?,cursada.idMateria=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, idAlumno);
@@ -174,20 +174,20 @@ public class CursadaData {
     }
     
     public void actualizarNotaCursada(int idAlumno, int nota){
-        String sql = "UPDATE cursada SET nota=? WHERE idAlumno=?";
+        String sql = "UPDATE cursada SET nota=? WHERE cursada.idAlumno=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, nota);
+            ps.setDouble(1, nota);
             ps.setInt(2, idAlumno);
             
             ps.executeUpdate();
-            
+            ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-
+    } 
+    
     public Alumno buscarAlumno (int id){
         AlumnoData newAlu = new AlumnoData(conexion);
         return newAlu.buscarAlumno(id);
