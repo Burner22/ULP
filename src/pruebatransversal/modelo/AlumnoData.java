@@ -131,23 +131,6 @@ public class AlumnoData {
          }
     }
     
-    public void actualizarEstadoAlumno (Alumno alumno){  //para actualizar el estado del alumno, para no eliminarlo 
-       String sql = "UPDATE alumno SET estado = ? WHERE idAlumno = ?"; 
-                               //se actualiza solo el estado del alumno 
-        try {                      
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            
-           ps.setBoolean(1, alumno.getEstado());
-            ps.setInt(2, alumno.getIdAlumno());     
-           
-            ps.executeUpdate(); 
-                   
-        } catch (SQLException ex) {
-             Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     public void borrarAlumno (int id){
         String sql = "DELETE FROM alumno WHERE idAlumno=?";
         

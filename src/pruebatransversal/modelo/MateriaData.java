@@ -88,4 +88,20 @@ public class MateriaData {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+    
+    public void borrarMateria (int id){
+    String sql = "DELETE FROM materia WHERE idMateria=?";
+
+     try {
+         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+         ps.setInt(1, id);
+
+         ps.executeUpdate();
+
+         ps.close();
+     } catch (SQLException ex) {
+         Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
+     }          
+    }
 }   
