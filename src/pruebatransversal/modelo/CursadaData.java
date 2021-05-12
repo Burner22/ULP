@@ -134,12 +134,13 @@ public class CursadaData {
     return materias;
     }
     
-    public ArrayList <Materia> obtenerMateriasNOCursadas (){
+    public ArrayList <Materia> obtenerMateriasNOCursadas (int id){
         Materia mater = null;
-        String sql = "SELECT * FROM materia WHERE NOT EXISTS (SELECT NULL FROM cursada WHERE materia.idMateria = cursada.idMateria)";
+        String sql = "SELECT * FROM materia WHERE idMateria not in (SELECT idMateria FROM cursada WHERE idAlumno =?)";
         ArrayList <Materia> noCurs = new ArrayList <>();
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
