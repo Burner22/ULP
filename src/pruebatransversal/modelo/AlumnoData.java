@@ -128,7 +128,7 @@ public class AlumnoData {
          } catch (SQLException ex) {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }
+    }  //FUNCIONA
     
     public void borrarAlumno (int id){
         String sql = "DELETE FROM alumno WHERE idAlumno=?";
@@ -144,6 +144,6 @@ public class AlumnoData {
          } catch (SQLException ex) {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }          
-    }
+    }   //FUNCIONA
     
 }

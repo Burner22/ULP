@@ -32,23 +32,30 @@ public class PruebaTransversal {
         
         //newCurs.guardarCursada(cur1); //guardarCursada(Cursada cursada)
 
-        Iterator it = newCurs.obtenerCursadas().iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
-       /* Iterator ip = newCurs.obtenerMateriasCursadas(4).iterator();
-            while(ip.hasNext()){
-            System.out.println(ip.next());
-        }*/
-       Iterator is = (Iterator) newCurs.obtenerCursadasXAlumno(11);
-       while(is.hasNext()){
-            System.out.println(is.next());
-        }
+//        Iterator it = newCurs.obtenerCursadas().iterator();
+//        while(it.hasNext()){
+//            System.out.println(it.next());
+//        }
+//        Iterator ip = newCurs.obtenerMateriasCursadas(4).iterator();
+//            while(ip.hasNext()){
+//            System.out.println(ip.next());
+//        }
+//       Iterator is = newCurs.obtenerCursadasXAlumno(11).iterator();
+//       while(is.hasNext()){
+//            System.out.println(is.next());
+//        }
+//       
+//       Iterator ik = newCurs.obtenerMateriasNOCursadas(9).iterator();
+//       while(ik.hasNext()){
+//           System.out.println(ik.next());
+//       }
        
-       
+        //newCurs.borrarCursadaDeUnaMateriaDeUnAlumno(12);  //borrarCursadaDeUnaMateriaDeUnAlumno(int id) 
+
+        //newCurs.actualizarNotaCursada(11, 8);   //actualizarNotaCursada(int idAlumno, nota)
         
-
-
+        //////////////////////////////////////////////////////////
+        
         //System.out.println(newAlu.buscarAlumno(9)); //buscarAlumno(int id)
         
         //Iterator it = newAlu.obtenerAlumnos().iterator(); //obtenerAlumnos()

@@ -140,5 +140,5 @@ public class MateriaData {
      } catch (SQLException ex) {
          Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
      }          
-    }
+    }   //FUNCIONA
 }   

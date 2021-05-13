@@ -54,7 +54,7 @@ public class CursadaData {
             ResultSet rs = ps.executeQuery(); 
             while (rs.next()){
                 
-                cursada = new Cursada(new Materia(),new Alumno());
+                cursada = new Cursada(new Materia(),new Alumno(),0);
                 cursada.setIdCursada(rs.getInt(1));
                 cursada.getAlum().setIdAlumno(rs.getInt(2));
                 cursada.getMater().setIdMateria(rs.getInt(3));
@@ -67,24 +67,23 @@ public class CursadaData {
             Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cursadas;
-    }
+    } //FUNCIONA
 
     public ArrayList <Cursada> obtenerCursadasXAlumno(int id){
         String sql = "SELECT * FROM cursada WHERE cursada.idAlumno=?";
         ArrayList <Cursada> cursadas = new ArrayList <> ();
         Cursada ins;      
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
+            
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
-                ins = new Cursada();
+                ins = new Cursada(new Materia(),new Alumno(),0);
                 ins.setIdCursada(rs.getInt(1));
-                Alumno alu = this.buscarAlumno(rs.getInt(2));
-                Materia mat = this.buscarMateria(rs.getInt(3));
-                ins.setAlum(alu);
-                ins.setMater(mat);
+                ins.getAlum().setIdAlumno(rs.getInt(2));
+                ins.getMater().setIdMateria(rs.getInt(3));
                 ins.setNota(rs.getDouble(4));
                 cursadas.add(ins);
             }
@@ -93,7 +92,7 @@ public class CursadaData {
             ex.getLocalizedMessage();
         }     
     return cursadas;    
-    }
+    }   //FUNCIONA
     
     public ArrayList <Cursada> obtenerMateriasCursadas (int id){
     String sql = "SELECT * FROM cursada WHERE idMateria=?";
@@ -105,12 +104,10 @@ public class CursadaData {
         ResultSet rs = ps.executeQuery();
         
         while (rs.next()){
-            ins = new Cursada();
+            ins = new Cursada(new Materia(),new Alumno(),0);
             ins.setIdCursada(rs.getInt(1));
-            Alumno alu = buscarAlumno(rs.getInt(2));
-            Materia mat = buscarMateria(rs.getInt(3));
-            ins.setAlum(alu);
-            ins.setMater(mat);
+            ins.getAlum().setIdAlumno(rs.getInt(2));
+            ins.getMater().setIdMateria(rs.getInt(3));
             ins.setNota(rs.getDouble(4));
             materias.add(ins);
         }
@@ -119,7 +116,7 @@ public class CursadaData {
         Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
     return materias;
-    }
+    }  //FUNCIONA
     
     public ArrayList <Materia> obtenerMateriasNOCursadas (int id){
         Materia mater = null;
@@ -143,22 +140,22 @@ public class CursadaData {
             Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return noCurs;
-    }
+    } //FUNCIONA 
 
-    public void borrarCursadaDeUnaMateriaDeUnAlumno (int idAlumno, int idMateria){
-        String sql = "DELETE FROM cursada WHERE cursada.idAlumno=?,cursada.idMateria=?";
+    public void borrarCursadaDeUnaMateriaDeUnAlumno (int idCursada){
+        String sql = "DELETE FROM cursada WHERE cursada.idCursada=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
+            ps.setInt(1, idCursada);
             
+            ps.executeUpdate();
             ps.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
+    }  //FUNCIONA
     
     public void actualizarNotaCursada(int idAlumno, int nota){
         String sql = "UPDATE cursada SET nota=? WHERE cursada.idAlumno=?";
@@ -173,15 +170,15 @@ public class CursadaData {
             Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    } 
+    }  //FUNCIONA
     
     public Alumno buscarAlumno (int id){
         AlumnoData newAlu = new AlumnoData(conexion);
         return newAlu.buscarAlumno(id);
-    }
+    }   //FUNCIONA
     
     public Materia buscarMateria (int id){
         MateriaData newMate = new MateriaData(conexion);
         return newMate.buscarMateria(id);
-    }
+    }   //FUNCIONA
 }
