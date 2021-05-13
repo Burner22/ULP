@@ -81,8 +81,8 @@ public class MateriaData {
         } 
         
         return materia;   
-    }   //FUNCIONA
-       
+    }   //FUNCIONA            
+    
     public ArrayList <Materia> obtenerMaterias(){
         ArrayList <Materia> materias = new ArrayList <>();
         Materia materia = null;
@@ -142,7 +142,7 @@ public class MateriaData {
      }          
     }   //FUNCIONA
     
-     public void borrarMateriaLogico(int id){
+    public void borrarMateriaLogico(int id){
         String query = "UPDATE materia SET estado=false WHERE idMateria=?";
         try {
             PreparedStatement ps = con.prepareStatement(query);

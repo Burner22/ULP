@@ -5,15 +5,16 @@
  */
 package vistas;
 
+import java.util.HashSet;
+import pruebatransversal.entidades.Alumno;
+
 /**
  *
  * @author Fiero-Sama
  */
 public class jfEscritorio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form jfEscritorio
-     */
+    
     public jfEscritorio() {
         initComponents();
     }
@@ -27,30 +28,59 @@ public class jfEscritorio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenu3 = new javax.swing.JMenu();
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jmActualizarNota = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+
+        jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1080, 720));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1080, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 561, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Materias");
         jMenuBar1.add(jMenu2);
+
+        jMenu4.setText("Alumnos");
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Inscripciones");
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Carga de Notas");
+
+        jmActualizarNota.setText("Actualizar Nota");
+        jmActualizarNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmActualizarNotaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jmActualizarNota);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Consultas");
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -58,15 +88,24 @@ public class jfEscritorio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmActualizarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmActualizarNotaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        jiCalificar mat = new jiCalificar();
+        mat.setVisible(true);
+        escritorio.add(mat);
+        escritorio.moveToFront(mat);
+    }//GEN-LAST:event_jmActualizarNotaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,9 +143,15 @@ public class jfEscritorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmActualizarNota;
     // End of variables declaration//GEN-END:variables
 }

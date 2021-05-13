@@ -9,12 +9,12 @@ package vistas;
  *
  * @author Fiero-Sama
  */
-public class jiInscripcion extends javax.swing.JInternalFrame {
+public class jiMateriaGuardar extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form jiInscripcion
+     * Creates new form jiMateria
      */
-    public jiInscripcion() {
+    public jiMateriaGuardar() {
         initComponents();
     }
 
