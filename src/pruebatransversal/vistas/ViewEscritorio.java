@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package pruebatransversal.vistas;
 
 import java.util.HashSet;
 import pruebatransversal.entidades.Alumno;
@@ -12,10 +12,10 @@ import pruebatransversal.entidades.Alumno;
  *
  * @author Fiero-Sama
  */
-public class jfEscritorio extends javax.swing.JFrame {
+public class ViewEscritorio extends javax.swing.JFrame {
 
     
-    public jfEscritorio() {
+    public ViewEscritorio() {
         initComponents();
     }
 
@@ -42,7 +42,6 @@ public class jfEscritorio extends javax.swing.JFrame {
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 720));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -101,7 +100,7 @@ public class jfEscritorio extends javax.swing.JFrame {
     private void jmActualizarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmActualizarNotaActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        jiCalificar mat = new jiCalificar();
+        ViewCalificar mat = new ViewCalificar();
         mat.setVisible(true);
         escritorio.add(mat);
         escritorio.moveToFront(mat);
@@ -124,20 +123,21 @@ public class jfEscritorio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jfEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jfEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jfEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jfEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewEscritorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jfEscritorio().setVisible(true);
+                new ViewEscritorio().setVisible(true);
             }
         });
     }

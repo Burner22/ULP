@@ -1,13 +1,13 @@
 
-package vistas;
+package pruebatransversal.vistas;
 
 import java.util.HashSet;
 import pruebatransversal.entidades.Alumno;
 import pruebatransversal.entidades.Materia;
 
-public class jiCalificar extends javax.swing.JInternalFrame {
+public class ViewCalificar extends javax.swing.JInternalFrame {
     
-    public jiCalificar() {
+    public ViewCalificar() {
         initComponents();
   
 

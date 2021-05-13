@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vistas;
+package pruebatransversal.vistas;
 
 /**
  *
  * @author Fiero-Sama
  */
-public class jiMateriaGuardar extends javax.swing.JInternalFrame {
+public class ViewAlumno extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form jiMateria
+     * Creates new form jiAlumno
      */
-    public jiMateriaGuardar() {
+    public ViewAlumno() {
         initComponents();
     }
 
