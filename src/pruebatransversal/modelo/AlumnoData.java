@@ -83,6 +83,40 @@ public class AlumnoData {
         return alumno;   
     }  //FUNCIONA
     
+    public Alumno buscarAlumnoXLegajo (int legajo){
+        Alumno alumno = null;  //Instancio Alumno vacio para poder llenarlo y convertirlo en algo potable
+        
+        try{
+            alumno = new Alumno(); //Nuevo alumno por si se realiza otra busqueda
+            
+            String sql = "SELECT * FROM alumno WHERE legajo = ?";
+            
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, legajo);   //(Parameter Index, valor int), 
+            
+            ResultSet rs = ps.executeQuery();   
+            
+            //Si encuentro alumno entonces lo instancio de manera manual, trayendo los datos de la BBDD
+            if (rs.next()){                         //LLeno el nuevo alumno con los valores que estan en la base de datos
+                alumno.setIdAlumno(rs.getInt(1));
+                alumno.setNombre(rs.getString(2));
+                alumno.setApellido(rs.getString(3));
+                alumno.setFechNac(rs.getDate(4).toLocalDate());
+                alumno.setLegajo(rs.getInt(5));
+                alumno.setEstado(rs.getBoolean(6));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se ha encontrado dicho alumno");
+            }
+            ps.close();
+        }
+        catch(HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, "No se ha encontrado alumno");
+        } 
+        return alumno;   
+    }
+    
     public ArrayList<Alumno> obtenerAlumnos(){
         ArrayList <Alumno> alumnos = new ArrayList <>();
         Alumno alumno = null;           //alumno nuevo vacio
@@ -145,7 +179,8 @@ public class AlumnoData {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }          
     }   //FUNCIONA
-     public void borrarAlumnoLogico(int id){
+    
+    public void borrarAlumnoLogico(int id){
         String sql = "UPDATE alumno SET estado=false WHERE idMateria=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
