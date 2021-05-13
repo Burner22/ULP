@@ -141,4 +141,17 @@ public class MateriaData {
          Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
      }          
     }   //FUNCIONA
+    
+     public void borrarMateriaLogico(int id){
+        String query = "UPDATE materia SET estado=false WHERE idMateria=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null, "Error de conexion.");
+        }
+        
+    }
 }   

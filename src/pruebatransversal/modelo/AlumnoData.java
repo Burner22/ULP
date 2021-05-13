@@ -145,5 +145,17 @@ public class AlumnoData {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }          
     }   //FUNCIONA
+     public void borrarAlumnoLogico(int id){
+        String sql = "UPDATE alumno SET estado=false WHERE idMateria=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException sqle){
+            JOptionPane.showMessageDialog(null, "Error de conexion.");
+        }
+        
+    }
     
 }
