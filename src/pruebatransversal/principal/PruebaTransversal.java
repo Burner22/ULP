@@ -6,32 +6,74 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Iterator;
 import pruebatransversal.entidades.Alumno;
+import pruebatransversal.entidades.Cursada;
+import pruebatransversal.entidades.Materia;
 import pruebatransversal.modelo.AlumnoData;
 import pruebatransversal.modelo.Conexion;
+import pruebatransversal.modelo.CursadaData;
+import pruebatransversal.modelo.MateriaData;
 
 public class PruebaTransversal {
 
     public static void main(String[] args) {
         Conexion con = new Conexion ();
-    
-        Alumno a = new Alumno ("claudia","Clarinete",LocalDate.of(1995, Month.MARCH, 22),4,true,7); //Pruebas para actualizar alumno
+        AlumnoData newAlu = new AlumnoData(con);
+        MateriaData newMate = new MateriaData(con);
+        CursadaData newCurs = new CursadaData(con);
         
-        AlumnoData newAlu = new AlumnoData (con);
+        //Alumno alu1 = new Alumno ("Roberto","Perez", LocalDate.of(1999, Month.FEBRUARY, 8),151015,true,9);
+        //Alumno alu2 = new Alumno ("Ezequiel","Coronel", LocalDate.of(2000, Month.MARCH, 22),784514,true,11);
+        //Materia mat1 = new Materia ("Laboratorio de Programacion",4,true,4);
+        //Materia mat2 = new Materia ("EDA",1,true,5);
+        //newAlu.agregarAlumno(alu2);
+        //newMate.agregarMateria(mat2);
         
-        //newAlu.agregarAlumno(a);
+        //Cursada cur1 = new Cursada(mat2,alu2,0);
         
-        //System.out.println(newAlu.buscarAlumno(6));
-        
-        Iterator it = newAlu.obtenerAlumnos().iterator(); //Instancio iterator sobre la lista creada en obtener alumnos
-        
+        //newCurs.guardarCursada(cur1); //guardarCursada(Cursada cursada)
+
+        Iterator it = newCurs.obtenerCursadas().iterator();
         while(it.hasNext()){
-            System.out.println(it.next());  //Enlisto los alumnos
+            System.out.println(it.next());
         }
+       /* Iterator ip = newCurs.obtenerMateriasCursadas(4).iterator();
+            while(ip.hasNext()){
+            System.out.println(ip.next());
+        }*/
+       Iterator is = (Iterator) newCurs.obtenerCursadasXAlumno(11);
+       while(is.hasNext()){
+            System.out.println(is.next());
+        }
+       
+       
         
-        newAlu.actualizarAlumno(a);   //Actualizar alumnos
+
+
+        //System.out.println(newAlu.buscarAlumno(9)); //buscarAlumno(int id)
         
-        newAlu.borrarAlumno(6);
+        //Iterator it = newAlu.obtenerAlumnos().iterator(); //obtenerAlumnos()
+        //while(it.hasNext()){
+        //    System.out.println(it.next());
+        //}
         
+        //newAlu.actualizarAlumno(alu1);  //actualizarAlumno(Alumno alumno)
+
+        //newAlu.borrarAlumno(12);  //borrarAlumno(int id)
+        
+        /////////////////////////////////////////////////////////
+        
+        //System.out.println(newMate.buscarMateria(4)); //buscarMateria(int id)
+        
+        //Iterator it = newMate.obtenerMaterias().iterator();  //obtenerMaterias()
+        //while(it.hasNext()){
+        //    System.out.println(it.next());  
+        //}
+        
+        //newMate.actualizarMateria(mat1);  //actualizarMateria(Materia materia)
+        
+        //newMate.borrarMateria(6);  //borrarMateria(int id)
+        
+        ////////////////////////////////////////////////////////
         
     }
     

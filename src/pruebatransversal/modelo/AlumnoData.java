@@ -47,7 +47,7 @@ public class AlumnoData {
             JOptionPane.showMessageDialog(null, "No se pudo agregar el alumno");
         }
         
-    }
+    } //FUNCIONA
             
     public Alumno buscarAlumno (int id){
         Alumno alumno = null;  //Instancio Alumno vacio para poder llenarlo y convertirlo en algo potable
@@ -80,9 +80,8 @@ public class AlumnoData {
         catch(HeadlessException | SQLException e){
             JOptionPane.showMessageDialog(null, "No se ha encontrado alumno");
         } 
-        
         return alumno;   
-    }
+    }  //FUNCIONA
     
     public ArrayList<Alumno> obtenerAlumnos(){
         ArrayList <Alumno> alumnos = new ArrayList <>();
@@ -109,7 +108,7 @@ public class AlumnoData {
              Logger.getLogger(AlumnoData.class.getName()).log(Level.SEVERE, null, ex);
          }
         return alumnos;      
-    }
+    }  //FUNCIONA
     
     public void actualizarAlumno (Alumno alumno){  //Aunque abajo aparezca "setInt" no significa que vaya a cambiar el valor
         String sql = "UPDATE alumno SET nombre = ?,apellido = ?,fecha_nacimiento = ?,legajo = ?,estado = ? WHERE idAlumno = ?"; 

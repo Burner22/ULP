@@ -14,7 +14,8 @@ import pruebatransversal.entidades.Alumno;
 import pruebatransversal.entidades.Materia;
 
 public class MateriaData {
-    Connection con;//conexion a base de datos
+    
+    private Connection con;//conexion a base de datos
     //Probando push.
     public MateriaData(Conexion c){//conexion a la base de datos
         con = c.getConnection();
@@ -27,8 +28,8 @@ public class MateriaData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                                     
             ps.setString(1, materia.getNombre());
-            ps.setInt(4, materia.getAño());
-            ps.setBoolean(5, materia.getEstado());
+            ps.setInt(2, materia.getAño());
+            ps.setBoolean(3, materia.getEstado());
             
             ps.executeUpdate();
             
@@ -47,7 +48,7 @@ public class MateriaData {
         catch(SQLException e){
             JOptionPane.showMessageDialog(null, "No se pudo agregar la Materia");
         }
-    }
+    }  //FUNCIONA
     
     public Materia buscarMateria (int id){
         Materia materia = null;  //Instancio Alumno vacio para poder llenarlo y convertirlo en algo potable
@@ -80,10 +81,11 @@ public class MateriaData {
         } 
         
         return materia;   
-    }
+    }   //FUNCIONA
        
     public ArrayList <Materia> obtenerMaterias(){
         ArrayList <Materia> materias = new ArrayList <>();
+        Materia materia = null;
         String sql = "SELECT * FROM materia"; //todo lo que tenga materia
         
          try {
@@ -92,19 +94,19 @@ public class MateriaData {
              ResultSet rs = ps.executeQuery();  //este elemento muestra los elemntos que se encuentan en la BD
              
              while (rs.next()){                 
-               Materia aux=new Materia();//aux sirve como auxiliar para cargar la materia a la lista. 
-               aux.setIdMateria(rs.getInt(1));
-               aux.setNombre(rs.getString(2));
-               aux.setIdMateria(rs.getInt(3));
-               aux.setEstado(rs.getBoolean(6)); 
-               materias.add(aux);
-               
+               materia=new Materia();//aux sirve como auxiliar para cargar la materia a la lista. 
+               materia.setIdMateria(rs.getInt(1));
+               materia.setNombre(rs.getString(2));
+               materia.setIdMateria(rs.getInt(3));
+               materia.setEstado(rs.getBoolean(4)); 
+               materias.add(materia);
+               ps.close();
              }      
          } catch (SQLException ex) {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
         return materias;      
-    }
+    }  //FUNCIONA
     
     public void actualizarMateria (Materia materia){  
         String sql = "UPDATE materia SET nombre = ?,anio=?,estado = ? WHERE idMateria = ?"; 
@@ -115,13 +117,14 @@ public class MateriaData {
              ps.setString(1, materia.getNombre());
              ps.setInt(2, materia.getAño()); 
              ps.setBoolean(3, materia.getEstado());
-                 
+             ps.setInt(4, materia.getIdMateria()); 
+             
              ps.executeUpdate(); 
-                   
+             ps.close();
          } catch (SQLException ex) {
              Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }
+    }   //FUNCIONA
     
     public void borrarMateria (int id){
     String sql = "DELETE FROM materia WHERE idMateria=?";

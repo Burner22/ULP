@@ -19,17 +19,8 @@ public class CursadaData {
     }
     
     public void guardarCursada(Cursada cursada){
-        try {
-            String cons = "SELECT * FROM cursada WHERE idAlumno=?,idMateria=?";
-            PreparedStatement ps1 = con.prepareStatement(cons, Statement.RETURN_GENERATED_KEYS);
-            ps1.setInt(1, cursada.getAlum().getIdAlumno());
-            ps1.setInt(2, cursada.getMater().getIdMateria());
-            ps1.executeQuery();
-            ResultSet rs1 = ps1.getGeneratedKeys();
-            
-            if(!rs1.next()){
-            
-                String sql = "INSER INTO cursada (idAlumno,idMateria,nota) VALUES (?,?,?)";
+        try {           
+                String sql = "INSERT INTO cursada (idAlumno,idMateria,nota) VALUES (?,?,?)";
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
                 ps.setInt(1, cursada.getAlum().getIdAlumno());
@@ -47,27 +38,23 @@ public class CursadaData {
                     JOptionPane.showMessageDialog(null, "No se pudo obtener el Id de cursada");
                 }
                 ps.close();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "No se pudo realizar la incripcion");
-            }
+      
         } catch (SQLException ex) {
-            Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error");
         }
-    }
+    }  //FUNCIONA
     
     public ArrayList <Cursada> obtenerCursadas(){
         ArrayList <Cursada> cursadas = new ArrayList<>();
-        Cursada cursada = null;
+        Cursada cursada;
         String sql = "SELECT * FROM cursada";
         
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            ResultSet rs = ps.executeQuery();
-            
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); 
+            ResultSet rs = ps.executeQuery(); 
             while (rs.next()){
-                cursada = new Cursada();
+                
+                cursada = new Cursada(new Materia(),new Alumno());
                 cursada.setIdCursada(rs.getInt(1));
                 cursada.getAlum().setIdAlumno(rs.getInt(2));
                 cursada.getMater().setIdMateria(rs.getInt(3));
@@ -83,19 +70,19 @@ public class CursadaData {
     }
 
     public ArrayList <Cursada> obtenerCursadasXAlumno(int id){
-        String sql = "SELECT * FROM cursada WHERE idAlumno=?";
+        String sql = "SELECT * FROM cursada WHERE cursada.idAlumno=?";
         ArrayList <Cursada> cursadas = new ArrayList <> ();
         Cursada ins;      
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
                 ins = new Cursada();
                 ins.setIdCursada(rs.getInt(1));
-                Alumno alu = buscarAlumno(rs.getInt(2));
-                Materia mat = buscarMateria(rs.getInt(3));
+                Alumno alu = this.buscarAlumno(rs.getInt(2));
+                Materia mat = this.buscarMateria(rs.getInt(3));
                 ins.setAlum(alu);
                 ins.setMater(mat);
                 ins.setNota(rs.getDouble(4));
@@ -103,7 +90,7 @@ public class CursadaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getLocalizedMessage();
         }     
     return cursadas;    
     }

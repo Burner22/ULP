@@ -13,7 +13,7 @@ public class Cursada {
     public Cursada(Materia mater, Alumno alum, double nota) {
         this.mater = mater;
         this.alum = alum;
-        this.nota = nota;
+        this.nota = nota;         
     }
 
     public Cursada(int idCursada, Materia mater, Alumno alum, double nota) {
@@ -53,6 +53,11 @@ public class Cursada {
 
     public void setNota(double nota) {
         this.nota = nota;
+    }
+
+    @Override
+    public String toString() {
+        return "Cursada: " + "idCursada=" + idCursada + ", idMateria= " + mater.getIdMateria() + ", idAlumno=" + alum.getIdAlumno() + ", nota=" + nota;
     }
     
     
