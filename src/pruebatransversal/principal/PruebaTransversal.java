@@ -22,13 +22,13 @@ public class PruebaTransversal {
         CursadaData newCurs = new CursadaData(con);
         
         //Alumno alu1 = new Alumno ("Roberto","Perez", LocalDate.of(1999, Month.FEBRUARY, 8),151015,true,9);
-        //Alumno alu2 = new Alumno ("Ezequiel","Coronel", LocalDate.of(2000, Month.MARCH, 22),784514,true,11);
+        Alumno alu2 = new Alumno ("Ezequiel","Coronel", LocalDate.of(2000, Month.MARCH, 22),784514,true);
         //Materia mat1 = new Materia ("Laboratorio de Programacion",4,true,4);
-        //Materia mat2 = new Materia ("EDA",1,true,5);
+        Materia mat2 = new Materia ("EDA",1,true);
         //newAlu.agregarAlumno(alu2);
         //newMate.agregarMateria(mat2);
         
-        //Cursada cur1 = new Cursada(mat2,alu2,0);
+        Cursada cur1 = new Cursada(11,mat2,alu2,10);
         
         //newCurs.guardarCursada(cur1); //guardarCursada(Cursada cursada)
 
@@ -49,7 +49,10 @@ public class PruebaTransversal {
 //       while(ik.hasNext()){
 //           System.out.println(ik.next());
 //       }
-       
+        System.out.println(newCurs.buscarInscripcion(13));
+        
+        newCurs.actualizarNotaCursada(cur1);
+        
         //newCurs.borrarCursadaDeUnaMateriaDeUnAlumno(12);  //borrarCursadaDeUnaMateriaDeUnAlumno(int id) 
 
         //newCurs.actualizarNotaCursada(11, 8);   //actualizarNotaCursada(int idAlumno, nota)

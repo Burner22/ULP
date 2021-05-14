@@ -157,12 +157,12 @@ public class CursadaData {
         
     }  //FUNCIONA
     
-    public void actualizarNotaCursada(int idAlumno, int nota){
-        String sql = "UPDATE cursada SET nota=? WHERE cursada.idAlumno=?";
+    public void actualizarNotaCursada(Cursada cur){
+        String sql = "UPDATE cursada SET nota=? WHERE cursada.idCursada=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, nota);
-            ps.setInt(2, idAlumno);
+            ps.setDouble(1, cur.getNota());
+            ps.setInt(2, cur.getIdCursada());
             
             ps.executeUpdate();
             ps.close();
@@ -173,12 +173,45 @@ public class CursadaData {
     }  //FUNCIONA
     
     public Alumno buscarAlumno (int id){
-        AlumnoData newAlu = new AlumnoData(conexion);
+        Conexion c = new Conexion();
+        AlumnoData newAlu = new AlumnoData(c);
         return newAlu.buscarAlumno(id);
     }   //FUNCIONA
     
     public Materia buscarMateria (int id){
-        MateriaData newMate = new MateriaData(conexion);
+        Conexion c = new Conexion();
+        MateriaData newMate = new MateriaData(c);
         return newMate.buscarMateria(id);
     }   //FUNCIONA
+    
+    public Cursada buscarInscripcion(int id){
+    Cursada curs = null;
+    String sql="SELECT * FROM cursada WHERE cursada.idCursada=?";
+     
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                curs = new Cursada();
+                curs.setIdCursada(rs.getInt(1));
+                Alumno a = buscarAlumno(rs.getInt(2));
+                Materia m = buscarMateria(rs.getInt(3));
+                curs.setAlum(a);
+                curs.setMater(m);
+                curs.setNota(rs.getDouble(4));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    return curs;
+    }
 }
+
+
+
+    

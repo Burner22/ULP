@@ -84,24 +84,6 @@ public class Alumno {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null) {
-            return false;
-        }
-        if (getClass() != o.getClass()) {
-            return false;
-        }
-        final Materia other = (Materia) o;
-        if (this.hashCode() != other.hashCode()) {
-            return false;
-        }
-        return true;     
-    }
-
-    @Override
     public int hashCode() {
         return getLegajo();
     }
