@@ -34,6 +34,7 @@ public class ViewEscritorio extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        jmNuevoAlumno = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jmActualizarNota = new javax.swing.JMenuItem();
@@ -61,6 +62,15 @@ public class ViewEscritorio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Alumnos");
+
+        jmNuevoAlumno.setText("Nuevo Alumno");
+        jmNuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmNuevoAlumnoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmNuevoAlumno);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Inscripciones");
@@ -105,6 +115,15 @@ public class ViewEscritorio extends javax.swing.JFrame {
         escritorio.add(mat);
         escritorio.moveToFront(mat);
     }//GEN-LAST:event_jmActualizarNotaActionPerformed
+
+    private void jmNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNuevoAlumnoActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ViewAlumno va = new ViewAlumno();
+        va.setVisible(true);
+        escritorio.add(va);
+        escritorio.moveToFront(va);
+    }//GEN-LAST:event_jmNuevoAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,5 +172,6 @@ public class ViewEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmActualizarNota;
+    private javax.swing.JMenuItem jmNuevoAlumno;
     // End of variables declaration//GEN-END:variables
 }

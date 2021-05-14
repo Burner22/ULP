@@ -27,6 +27,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alumnos"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmNuevoAlumno">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nuevo Alumno"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmNuevoAlumnoActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu5">
           <Properties>
