@@ -33,6 +33,7 @@ public class ViewEscritorio extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jmNuevaMateria = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmNuevoAlumno = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -59,6 +60,20 @@ public class ViewEscritorio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Materias");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jmNuevaMateria.setText("Agregar Materia");
+        jmNuevaMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmNuevaMateriaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmNuevaMateria);
+
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Alumnos");
@@ -125,6 +140,19 @@ public class ViewEscritorio extends javax.swing.JFrame {
         escritorio.moveToFront(va);
     }//GEN-LAST:event_jmNuevoAlumnoActionPerformed
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jmNuevaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNuevaMateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ViewMateriaGuardar ar = new ViewMateriaGuardar();
+        ar.setVisible(true);
+        escritorio.add(ar);
+        escritorio.moveToFront(ar);
+    }//GEN-LAST:event_jmNuevaMateriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,6 +200,7 @@ public class ViewEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmActualizarNota;
+    private javax.swing.JMenuItem jmNuevaMateria;
     private javax.swing.JMenuItem jmNuevoAlumno;
     // End of variables declaration//GEN-END:variables
 }
