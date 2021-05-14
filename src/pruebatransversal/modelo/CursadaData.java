@@ -157,22 +157,6 @@ public class CursadaData {
         
     }  //FUNCIONA
     
-    public void actualizarNotaCursada(int idMateria, double nota, int idCursada,int idAlumno){
-        String sql = "UPDATE cursada SET nota=? WHERE cursada.idMateria=? AND cursada.idCursada=? AND cursada.idAlumno=?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setDouble(1, nota);
-            ps.setInt(2, idMateria);
-            ps.setInt(3, idCursada);
-            ps.setInt(4, idAlumno);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }  //FUNCIONA
-    
     public Alumno buscarAlumno (int id){
         Conexion c = new Conexion();
         AlumnoData newAlu = new AlumnoData(c);
@@ -211,6 +195,38 @@ public class CursadaData {
 
     return curs;
     }
+
+    public void actualizarCursada(Cursada cursada){
+        String sql = "UPDATE cursada SET nota=? WHERE cursada.idCursada=?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, cursada.getNota());
+            ps.setInt(2, cursada.getIdCursada());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    public void actualizarNotaCursada(int idMateria, double nota, int idCursada,int idAlumno){
+        String sql = "UPDATE cursada SET nota=? WHERE cursada.idMateria=? AND cursada.idCursada=? AND cursada.idAlumno=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idMateria);
+            ps.setInt(3, idCursada);
+            ps.setInt(4, idAlumno);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }  //FUNCIONA
+
 }
 
 

@@ -2,8 +2,11 @@
 package pruebatransversal.vistas;
 
 
+import java.awt.event.ActionEvent;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pruebatransversal.entidades.Alumno;
@@ -23,7 +26,6 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         Conexion c = new Conexion();
         ad = new AlumnoData (c);
         id = new CursadaData (c);
-        //modelo = new DefaultTableModel();
         armaCabeceraTabla();
         cargaAlumnos();  
     }
@@ -48,6 +50,7 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         });
 
         jbGuardarNota.setText("Guardar");
+        jbGuardarNota.setEnabled(false);
         jbGuardarNota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarNotaActionPerformed(evt);
@@ -72,6 +75,11 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtIngresarNota.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jtIngresarNotaComponentAdded(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtIngresarNota);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,22 +138,33 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
             int idInscripcion=(Integer) modelo.getValueAt(filaSeleccionada, 0);
             Materia m = (Materia) modelo.getValueAt(filaSeleccionada, 1);
             double nota = Double.valueOf(modelo.getValueAt(filaSeleccionada, 2).toString());
+            Cursada cursada;
+            cursada = id.buscarInscripcion(idInscripcion);
+            cursada.setNota(nota);
+            cursada.setMater(m);
+            cursada.setAlum(a);
             
-//            Cursada cur;
-//            cur=id.buscarInscripcion(idInscripcion);
-//            cur.setNota(nota);
-            Materia aux = id.buscarMateria(m.getIdMateria());
-            id.actualizarNotaCursada(aux.getIdMateria(),nota,idInscripcion,a.getIdAlumno());
+            id.actualizarCursada(cursada);
+            
+            /*Materia aux = id.buscarMateria(m.getIdMateria());
+            id.actualizarNotaCursada(aux.getIdMateria(),nota,idInscripcion,a.getIdAlumno());*/
+            
             borraFilasTabla();
             cargaDatos();
             JOptionPane.showMessageDialog(null, "Se ha agregado su alumno");
-            
+            jtIngresarNota.clearSelection ();
         }
     }//GEN-LAST:event_jbGuardarNotaActionPerformed
 
+    private void jtIngresarNotaComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jtIngresarNotaComponentAdded
+        jtIngresarNota.clearSelection();
+        jbGuardarNota.setEnabled(true);
+        jtIngresarNota.transferFocusDownCycle();
+    }//GEN-LAST:event_jtIngresarNotaComponentAdded
+  
     public void armaCabeceraTabla (){
         ArrayList<Object> columnas = new ArrayList <Object>();
-        columnas.add("id");
+        columnas.add("Cursada");
         columnas.add("Materia");
         columnas.add("Nota");
         for (Object it:columnas){
