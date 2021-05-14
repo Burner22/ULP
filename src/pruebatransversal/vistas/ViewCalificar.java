@@ -124,19 +124,18 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
 
     private void jbGuardarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarNotaActionPerformed
         int filaSeleccionada = jtIngresarNota.getSelectedRow();
-        
+       
         if(filaSeleccionada != -1){
             Alumno a = (Alumno)jcbAlumnos.getSelectedItem();
             int idInscripcion=(Integer) modelo.getValueAt(filaSeleccionada, 0);
             Materia m = (Materia) modelo.getValueAt(filaSeleccionada, 1);
             double nota = Double.valueOf(modelo.getValueAt(filaSeleccionada, 2).toString());
-            Cursada cur;
-            cur = (Cursada)id.buscarInscripcion(idInscripcion);
-            cur.setNota(nota);
-            cur.setAlum(a);
-            cur.setMater(m);
-            cur.setIdCursada(idInscripcion);
-            id.actualizarNotaCursada(cur);
+            
+//            Cursada cur;
+//            cur=id.buscarInscripcion(idInscripcion);
+//            cur.setNota(nota);
+            Materia aux = id.buscarMateria(m.getIdMateria());
+            id.actualizarNotaCursada(aux.getIdMateria(),nota,idInscripcion,a.getIdAlumno());
             borraFilasTabla();
             cargaDatos();
             JOptionPane.showMessageDialog(null, "Se ha agregado su alumno");
@@ -175,13 +174,6 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         borraFilasTabla();
         
         Alumno elegido=(Alumno) jcbAlumnos.getSelectedItem();
-//      if(elegido != null){
-//            for(Cursada c:id.obtenerCursadasXAlumno(elegido.getIdAlumno())){
-//                if(c.getAlum().getIdAlumno() == elegido.getIdAlumno()){
-//                    modelo.addRow(new Object[]{c.getIdCursada(),c.getMater(),c.getNota()});
-//                }
-//            }
-//        }
         List<Cursada>lista = id.obtenerCursadasXAlumno(elegido.getIdAlumno());
         for (Cursada it:lista){
             modelo.addRow(new Object[]{it.getIdCursada(),it.getMater(),it.getNota()});

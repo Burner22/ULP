@@ -28,7 +28,7 @@ public class PruebaTransversal {
         //newAlu.agregarAlumno(alu2);
         //newMate.agregarMateria(mat2);
         
-        Cursada cur1 = new Cursada(11,mat2,alu2,10);
+        //Cursada cur1 = new Cursada(11,mat2,alu2,10);
         
         //newCurs.guardarCursada(cur1); //guardarCursada(Cursada cursada)
 
@@ -49,9 +49,9 @@ public class PruebaTransversal {
 //       while(ik.hasNext()){
 //           System.out.println(ik.next());
 //       }
-        System.out.println(newCurs.buscarInscripcion(13));
+        //System.out.println(newCurs.buscarInscripcion(13));
         
-        newCurs.actualizarNotaCursada(cur1);
+        newCurs.actualizarNotaCursada(4,5,7,9);
         
         //newCurs.borrarCursadaDeUnaMateriaDeUnAlumno(12);  //borrarCursadaDeUnaMateriaDeUnAlumno(int id) 
 

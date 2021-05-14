@@ -157,13 +157,14 @@ public class CursadaData {
         
     }  //FUNCIONA
     
-    public void actualizarNotaCursada(Cursada cur){
-        String sql = "UPDATE cursada SET nota=? WHERE cursada.idCursada=?";
+    public void actualizarNotaCursada(int idMateria, double nota, int idCursada,int idAlumno){
+        String sql = "UPDATE cursada SET nota=? WHERE cursada.idMateria=? AND cursada.idCursada=? AND cursada.idAlumno=?";
         try {
-            PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, cur.getNota());
-            ps.setInt(2, cur.getIdCursada());
-            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idMateria);
+            ps.setInt(3, idCursada);
+            ps.setInt(4, idAlumno);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
