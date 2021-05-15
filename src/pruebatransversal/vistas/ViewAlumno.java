@@ -236,7 +236,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         jtfApellido.setText("");
         jtfLegajo.setText("");
         jdFechaNac.setDate(null);
-        jcEstado.setContentAreaFilled(false);
+        jcEstado.setContentAreaFilled(true);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscaAlumnoActionPerformed
@@ -246,7 +246,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         jtfApellido.setText(al.getApellido());
         jtfLegajo.setText(String.valueOf(al.getLegajo()));
         jdFechaNac.setDate(Date.valueOf(al.getFechNac()));
-        jcEstado.setContentAreaFilled(al.getEstado());
+        jcEstado.setContentAreaFilled(! al.getEstado());
         JOptionPane.showMessageDialog(null, "Se ha encontrado su alumno");
     }//GEN-LAST:event_jbBuscaAlumnoActionPerformed
 

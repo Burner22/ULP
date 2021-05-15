@@ -194,7 +194,7 @@ public class CursadaData {
         }
 
     return curs;
-    }
+    }  //FUNCIONA
 
     public void actualizarCursada(Cursada cursada){
         String sql = "UPDATE cursada SET nota=? WHERE cursada.idCursada=?";
@@ -209,7 +209,7 @@ public class CursadaData {
             Logger.getLogger(CursadaData.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
+    }  //FUNCIONA
 
     public void actualizarNotaCursada(int idMateria, double nota, int idCursada,int idAlumno){
         String sql = "UPDATE cursada SET nota=? WHERE cursada.idMateria=? AND cursada.idCursada=? AND cursada.idAlumno=?";

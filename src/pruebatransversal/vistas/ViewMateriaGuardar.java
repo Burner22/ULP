@@ -5,9 +5,11 @@
  */
 package pruebatransversal.vistas;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import pruebatransversal.entidades.Materia;
 import pruebatransversal.modelo.Conexion;
+import pruebatransversal.modelo.CursadaData;
 import pruebatransversal.modelo.MateriaData;
 
 /**
@@ -15,12 +17,13 @@ import pruebatransversal.modelo.MateriaData;
  * @author Fiero-Sama
  */
 public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
-
+    CursadaData cs;
     MateriaData mat;
     public ViewMateriaGuardar() {
         initComponents();
         Conexion c = new Conexion();
         mat = new MateriaData (c);
+        cs = new CursadaData (c);
     }
 
     /**
@@ -65,12 +68,32 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,6 +176,46 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Se ha encontrado su materia");
     }//GEN-LAST:event_jbBuscarMateriaActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        String nombre = jtfNombre.getText();
+        int año = Integer.valueOf(jtfAño.getText());
+        boolean estado = jcEstado.isSelected();
+        
+        Materia materia = new Materia (nombre,año,estado);
+        mat.agregarMateria(materia);
+        jtfIdMateria.setText(materia.getIdMateria()+"");
+        
+        JOptionPane.showMessageDialog(null, "Se ha agregado su materia");
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        int id = Integer.valueOf(jtfIdMateria.getText());
+        String nombre = jtfNombre.getText();
+        int año = Integer.valueOf(jtfAño.getText());
+        boolean estado = jcEstado.isSelected();
+        Materia mate = new Materia (nombre,año,estado,id);
+        mat.actualizarMateria(mate);
+        jtfIdMateria.setText(mate.getIdMateria()+"");
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        int id = Integer.valueOf(jtfIdMateria.getText());
+        
+        mat.borrarMateria(id);
+        JOptionPane.showMessageDialog(null, "Su Materia ha sido eliminada!");
+        
+        
+        
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        jtfIdMateria.setText("");
+        jtfAño.setText("");
+        jcEstado.setContentAreaFilled(false);
+        jtfNombre.setText("");
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
