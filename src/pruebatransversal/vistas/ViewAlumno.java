@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import pruebatransversal.entidades.Alumno;
 import pruebatransversal.modelo.AlumnoData;
 import pruebatransversal.modelo.Conexion;
-import pruebatransversal.modelo.CursadaData;
+//import pruebatransversal.modelo.CursadaData;
 
 public class ViewAlumno extends javax.swing.JInternalFrame {
     AlumnoData ad;
