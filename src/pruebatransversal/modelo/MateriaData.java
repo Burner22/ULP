@@ -67,7 +67,7 @@ public class MateriaData {
         return materia;
     }   //FUNCIONA            
 
-    public ArrayList<Materia> obtenerMaterias() {//No esta devolviendo el año de las materias
+    public ArrayList<Materia> obtenerMaterias() {
         ArrayList<Materia> materias = new ArrayList<>();
         Materia materia = null;
         String sql = "SELECT * FROM materia"; //todo lo que tenga materia
@@ -81,7 +81,7 @@ public class MateriaData {
                 materia = new Materia();//aux sirve como auxiliar para cargar la materia a la lista. 
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre_materia"));
-                materia.setIdMateria(rs.getInt("anio"));
+                materia.setAño(rs.getInt("anio"));
                 materia.setEstado(rs.getBoolean("estado"));
                 materias.add(materia);
             }
