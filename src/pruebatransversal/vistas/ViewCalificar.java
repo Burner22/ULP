@@ -2,11 +2,9 @@
 package pruebatransversal.vistas;
 
 
-import java.awt.event.ActionEvent;
+
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pruebatransversal.entidades.Alumno;
@@ -40,6 +38,7 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtIngresarNota = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("Nombre: ");
 
@@ -82,17 +81,16 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jtIngresarNota);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel2.setText("CALIFICACIONES");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(jLabel1)
-                        .addGap(43, 43, 43)
-                        .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addContainerGap()
@@ -101,19 +99,29 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
                             .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(197, 197, 197)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(jLabel1)
+                        .addGap(43, 43, 43)
+                        .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(jLabel2)))
                 .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardarNota))
@@ -133,26 +141,28 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
 
     private void jbGuardarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarNotaActionPerformed
         int filaSeleccionada = jtIngresarNota.getSelectedRow();
-       
+        
         if(filaSeleccionada != -1){
             Alumno a = (Alumno)jcbAlumnos.getSelectedItem();
+            Materia m=new Materia();
             int idInscripcion=(Integer) modelo.getValueAt(filaSeleccionada, 0);
-            Materia m = (Materia) modelo.getValueAt(filaSeleccionada, 1);
-            double nota = Double.valueOf(modelo.getValueAt(filaSeleccionada, 2).toString());
+            m.setNombre((String)modelo.getValueAt(filaSeleccionada, 1));
+            double nota = Double.parseDouble(modelo.getValueAt(filaSeleccionada, 2).toString());
+            
             Cursada cursada;
             cursada = id.buscarInscripcion(idInscripcion);
             cursada.setNota(nota);
             cursada.setMater(m);
             cursada.setAlum(a);
             
-            id.actualizarCursada(cursada);
+            id.actualizarNotaCursada(idInscripcion,a.getIdAlumno(),nota);
             
             /*Materia aux = id.buscarMateria(m.getIdMateria());
             id.actualizarNotaCursada(aux.getIdMateria(),nota,idInscripcion,a.getIdAlumno());*/
             
             borraFilasTabla();
             cargaDatos();
-            JOptionPane.showMessageDialog(null, "Se ha agregado su alumno");
+            JOptionPane.showMessageDialog(null, "Se cambio la nota");
             jtIngresarNota.clearSelection ();
         }
     }//GEN-LAST:event_jbGuardarNotaActionPerformed
@@ -196,12 +206,13 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         Alumno elegido=(Alumno) jcbAlumnos.getSelectedItem();
         List<Cursada>lista = id.obtenerCursadasXAlumno(elegido.getIdAlumno());
         for (Cursada it:lista){
-            modelo.addRow(new Object[]{it.getIdCursada(),it.getMater(),it.getNota()});
+            modelo.addRow(new Object[]{it.getIdCursada(),it.getMater().getNombre(),it.getNota()});
         }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbGuardarNota;
     private javax.swing.JButton jbSalir;

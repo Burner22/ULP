@@ -32,14 +32,17 @@ public class ViewEscritorio extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jmNuevaMateria = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmNuevoAlumno = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jmiInscripcionMaterias = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jmActualizarNota = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
+        jmListadoAlumnosxMateria = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -57,6 +60,15 @@ public class ViewEscritorio extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Archivo");
+
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Materias");
@@ -89,6 +101,15 @@ public class ViewEscritorio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Inscripciones");
+
+        jmiInscripcionMaterias.setText("Inscripción a materias");
+        jmiInscripcionMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInscripcionMateriasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jmiInscripcionMaterias);
+
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Carga de Notas");
@@ -104,6 +125,15 @@ public class ViewEscritorio extends javax.swing.JFrame {
         jMenuBar1.add(jMenu6);
 
         jMenu7.setText("Consultas");
+
+        jmListadoAlumnosxMateria.setText("Listado de Alumnos por Materia");
+        jmListadoAlumnosxMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListadoAlumnosxMateriaActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jmListadoAlumnosxMateria);
+
         jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
@@ -153,6 +183,29 @@ public class ViewEscritorio extends javax.swing.JFrame {
         escritorio.moveToFront(ar);
     }//GEN-LAST:event_jmNuevaMateriaActionPerformed
 
+    private void jmiInscripcionMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInscripcionMateriasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ViewInscripcionGuardar ig=new  ViewInscripcionGuardar();
+        ig.setVisible(true);
+        escritorio.add(ig);
+        escritorio.moveToFront(ig);
+     
+    }//GEN-LAST:event_jmiInscripcionMateriasActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jmListadoAlumnosxMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListadoAlumnosxMateriaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ViewListadoAlumnosXMateria lam=new  ViewListadoAlumnosXMateria();
+        lam.setVisible(true);
+        escritorio.add(lam);
+        escritorio.moveToFront(lam);
+    }//GEN-LAST:event_jmListadoAlumnosxMateriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,8 +252,11 @@ public class ViewEscritorio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmActualizarNota;
+    private javax.swing.JMenuItem jmListadoAlumnosxMateria;
     private javax.swing.JMenuItem jmNuevaMateria;
     private javax.swing.JMenuItem jmNuevoAlumno;
+    private javax.swing.JMenuItem jmiInscripcionMaterias;
     // End of variables declaration//GEN-END:variables
 }

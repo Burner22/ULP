@@ -69,10 +69,10 @@ public class CursadaData {
         return cursadas;
     } //FUNCIONA
 
-    public ArrayList<Cursada> obtenerCursadasXAlumno(int id) {
+        public ArrayList<Cursada> obtenerCursadasXAlumno(int id) {
         ArrayList<Cursada> cursadasXAlumno = new ArrayList<>();
         Cursada cursada;
-        String sql = "SELECT * FROM cursada WHERE cursada.idAlumno=?";
+        String sql = "SELECT * FROM cursada,materia WHERE cursada.idMateria=materia.idMateria AND cursada.idAlumno=?";
        
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -85,6 +85,7 @@ public class CursadaData {
                 cursada.setIdCursada(rs.getInt("idCursada"));
                 cursada.getAlum().setIdAlumno(rs.getInt("idAlumno"));
                 cursada.getMater().setIdMateria(rs.getInt("idMateria"));
+                cursada.getMater().setNombre(rs.getString("nombre_materia"));
                 cursada.setNota(rs.getDouble("nota"));
                 cursadasXAlumno.add(cursada);
             }
@@ -94,6 +95,33 @@ public class CursadaData {
         }
         return cursadasXAlumno;
     }   //FUNCIONA
+    public ArrayList<Cursada>obtenerMateriasXAlumno(int id){
+        ArrayList<Cursada> materiasXAlumno = new ArrayList<>();
+        Cursada cursada;
+        String sql = "SELECT * FROM cursada,alumno WHERE alumno.idAlumno=cursada.idAlumno AND cursada.idMateria=?";
+       
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cursada = new Cursada(new Materia(), new Alumno(), 0);
+                cursada.setIdCursada(rs.getInt("idCursada"));
+                cursada.getAlum().setIdAlumno(rs.getInt("idAlumno"));
+                cursada.getAlum().setNombre(rs.getNString("nombre"));
+                cursada.getAlum().setApellido(rs.getNString("apellido"));
+                cursada.getMater().setIdMateria(rs.getInt("idMateria"));
+                cursada.setNota(rs.getDouble("nota"));
+                materiasXAlumno.add(cursada);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener cursadas/Inscripciones del alumno: " + ex.getMessage());
+        }
+        return materiasXAlumno;
+    }
 
     public ArrayList<Materia> obtenerMateriasCursadas(int id) {
         ArrayList<Materia> materiasCursadas = new ArrayList<>();
