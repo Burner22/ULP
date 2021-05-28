@@ -155,10 +155,7 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
             cursada.setMater(m);
             cursada.setAlum(a);
             
-            id.actualizarNotaCursada(idInscripcion,a.getIdAlumno(),nota);
-            
-            /*Materia aux = id.buscarMateria(m.getIdMateria());
-            id.actualizarNotaCursada(aux.getIdMateria(),nota,idInscripcion,a.getIdAlumno());*/
+            id.actualizarCursada(cursada);           
             
             borraFilasTabla();
             cargaDatos();
