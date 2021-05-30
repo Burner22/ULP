@@ -40,7 +40,7 @@ public class AlumnoData {
             
         }
         catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al agregar al alumno: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Su alumno ya existe!");
         }
         
     } //FUNCIONA

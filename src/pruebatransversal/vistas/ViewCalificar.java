@@ -185,10 +185,11 @@ public final class ViewCalificar extends javax.swing.JInternalFrame {
         List<Alumno> lista = ad.obtenerAlumnos();
         
         for (Alumno item:lista){
-           jcbAlumnos.addItem(item);
+            if(item.getEstado()==true){
+                jcbAlumnos.addItem(item);
+            }
         }
     }
-    
     public void borraFilasTabla(){
         int a = modelo.getRowCount()-1;
         

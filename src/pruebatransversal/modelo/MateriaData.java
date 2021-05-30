@@ -56,9 +56,10 @@ public class MateriaData {
                 materia.setNombre(rs.getString("nombre_materia"));
                 materia.setAño(rs.getInt("anio"));
                 materia.setEstado(rs.getBoolean("estado"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha encontrado dicha materia");
-            }
+            } 
+//            else {
+//                JOptionPane.showMessageDialog(null, "No se ha encontrado dicha materia");
+//            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al buscar materia: "+ ex.getMessage());

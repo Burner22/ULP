@@ -222,7 +222,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
             String apellidoAlumno = jtfApellido.getText();
             String nombreAlumno = jtfNombre.getText();
             String auxFecha = formatFecha.format(jDateFechaNac.getDate());
-//            boolean estadoAlumno = jcbEstado.isSelected();
+//          boolean estadoAlumno = jcbEstado.isSelected();
 
             if (apellidoAlumno.isEmpty() || nombreAlumno.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Para Actualizar a un alumno se necesitan todos los datos del mismo");
@@ -240,6 +240,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                     alumnoActualizar.setApellido(jtfApellido.getText());
                     alumnoActualizar.setNombre(jtfNombre.getText());
                     alumnoActualizar.setFechNac(LocalDate.parse(auxFecha, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    alumnoActualizar.setEstado(true);
 
                     ad.actualizarAlumno(alumnoActualizar);
                     limpiarTextFields();
@@ -251,11 +252,10 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Se cancelo la operacion");
                 }
             }
-
-        } catch (NullPointerException | NumberFormatException nEx) {
+            jtfLegajo.setEnabled(true);  //agregado
+        } catch (NumberFormatException | NullPointerException nEx) {
             JOptionPane.showMessageDialog(this, "Para actualizar a un alumno se necesitan todos los datos del mismo");
         }
-
 
     }//GEN-LAST:event_jbActualizarActionPerformed
 
@@ -281,6 +281,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
             jbBorrar.setEnabled(false);
             jbActualizar.setEnabled(false);
             jbLimpiar.setEnabled(false);
+            jtfLegajo.setEnabled(true);  //agregado
         } catch (NumberFormatException | NullPointerException numEx) {
             JOptionPane.showMessageDialog(this, "Para borrar un alumno se necesitan todos los datos del mismo");
             limpiarTextFields();
@@ -288,7 +289,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
             jbActualizar.setEnabled(false);
             jbLimpiar.setEnabled(false);
         }
-
+        
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -320,14 +321,12 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                 jbGuardar.setEnabled(false);
                 jbActualizar.setEnabled(false);
                 jbBorrar.setEnabled(false);
-                jbLimpiar.setEnabled(false);
+                jbLimpiar.setEnabled(false);   
             }
+            jtfLegajo.setEnabled(true); //agregado
         } catch (NumberFormatException | NullPointerException numEx){
             JOptionPane.showMessageDialog(this, "Para dar de alta a un alumno se necesitan todos los datos del mismo");
-        }
-        
-        
-        
+        }    
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -336,6 +335,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
         jbBorrar.setEnabled(false);
         jbActualizar.setEnabled(false);
         jbLimpiar.setEnabled(false);
+        jtfLegajo.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscaAlumnoActionPerformed
@@ -343,11 +343,11 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
             int legajoAlumno = Integer.parseInt(jtfLegajo.getText());
             Alumno alumnoXLegajo = ad.buscarAlumnoXLegajo(legajoAlumno);
 
-            if (alumnoXLegajo != null && alumnoXLegajo.getEstado()) {
+            if (alumnoXLegajo != null /*&& alumnoXLegajo.getEstado()*/) {
                 jtfApellido.setText(alumnoXLegajo.getApellido());
                 jtfNombre.setText(alumnoXLegajo.getNombre());
                 jDateFechaNac.setDate(Date.valueOf(alumnoXLegajo.getFechNac()));
-                jcbEstado.setSelected(alumnoXLegajo.getEstado());
+                jcbEstado.setSelected(!alumnoXLegajo.getEstado());
 
                 jbBorrar.setEnabled(true);
                 jbActualizar.setEnabled(true);
@@ -367,6 +367,7 @@ public class ViewAlumno extends javax.swing.JInternalFrame {
                 jbLimpiar.setEnabled(false);
                 jtfLegajo.requestFocus();
             }
+            jtfLegajo.setEnabled(true);
 
         } catch (NumberFormatException | NullPointerException nEx) {
             JOptionPane.showMessageDialog(this, "Para buscar un legajo ingrese solo numeros");

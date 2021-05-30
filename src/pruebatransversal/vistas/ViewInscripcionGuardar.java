@@ -46,9 +46,10 @@ public class ViewInscripcionGuardar extends javax.swing.JInternalFrame {
     public void llenarCombo(){
         List<Alumno> listado= ad.obtenerAlumnos();
         for(Alumno it: listado){
-            jcbAlumnos.addItem(it);
+            if(it.getEstado()==true){
+                jcbAlumnos.addItem(it);
+            }
         }
-        
     }
     
     public void armarCabecera(){
