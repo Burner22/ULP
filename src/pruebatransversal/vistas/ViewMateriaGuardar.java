@@ -5,7 +5,6 @@
  */
 package pruebatransversal.vistas;
 
-
 import javax.swing.JOptionPane;
 import pruebatransversal.entidades.Materia;
 import pruebatransversal.modelo.Conexion;
@@ -13,13 +12,15 @@ import pruebatransversal.modelo.CursadaData;
 import pruebatransversal.modelo.MateriaData;
 
 public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
+
     CursadaData cs;
     MateriaData mat;
+
     public ViewMateriaGuardar() {
         initComponents();
         Conexion c = new Conexion();
-        mat = new MateriaData (c);
-        cs = new CursadaData (c);
+        mat = new MateriaData(c);
+        cs = new CursadaData(c);
         jcEstado.setEnabled(false);
         jbActualizar.setEnabled(false);
         jbBorrar.setEnabled(false);
@@ -196,106 +197,106 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMateriaActionPerformed
-        try{
-        int idMateria = Integer.valueOf(jtfIdMateria.getText());
-        Materia ma = mat.buscarMateria(idMateria);
-        jtfNombre.setText(ma.getNombre());
-        jsAño.setValue(ma.getAño());
-        jcEstado.setSelected(ma.getEstado());
-        
-        JOptionPane.showMessageDialog(this, "Se ha encontrado su materia");
-        jtfIdMateria.setEnabled(false);
-        jbActualizar.setEnabled(true);
-        jbBorrar.setEnabled(true);
-        jbLimpiar.setEnabled(true);
-        jbGuardar.setEnabled(false);
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Error al ingresar dato de busqueda");
-        }
-        catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "No se ha encontrado su materia");
+        try {
+            int idMateria = Integer.valueOf(jtfIdMateria.getText());
+            Materia ma = mat.buscarMateria(idMateria);
+            jtfNombre.setText(ma.getNombre());
+            jsAño.setValue(ma.getAño());
+            jcEstado.setSelected(ma.getEstado());
+
+            JOptionPane.showMessageDialog(this, "Se ha encontrado su materia");
+            jtfIdMateria.setEnabled(false);
+            jbActualizar.setEnabled(true);
+            jbBorrar.setEnabled(true);
+            jbLimpiar.setEnabled(true);
+            jbGuardar.setEnabled(false);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Para buscar una materia por id ingrese solo numeros");
             jtfIdMateria.setText("");
             jsAño.setValue(1);
             jcEstado.setSelected(false);
             jtfNombre.setText("");
+            jtfIdMateria.requestFocus();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No se ha encontrado su materia");
+            jtfIdMateria.setText("");
+            jsAño.setValue(1);
+            jcEstado.setSelected(false);
+            jtfNombre.setText("");
+            jtfIdMateria.requestFocus();
         }
     }//GEN-LAST:event_jbBuscarMateriaActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        try{
+        try {
             jbGuardar.setEnabled(true);
             String nombre = jtfNombre.getText();
-            int año = (Integer)jsAño.getValue();
+            int año = (Integer) jsAño.getValue();
             boolean estado = true;
-        
-            Materia materia = new Materia (nombre,año,estado);
+
+            Materia materia = new Materia(nombre, año, estado);
             mat.agregarMateria(materia);
-            jtfIdMateria.setText(materia.getIdMateria()+"");
-        
-            JOptionPane.showMessageDialog(null, "Se ha agregado su materia");
+            jtfIdMateria.setText(materia.getIdMateria() + "");
+
+            JOptionPane.showMessageDialog(this, "Se ha agregado su materia");
             
-            jbActualizar.setEnabled(true);
-            jbBorrar.setEnabled(true);
+            jbGuardar.setEnabled(false);
             jbLimpiar.setEnabled(true);
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Error al buscar alumno");
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error al agregar una materia");
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        try{
-        int id = Integer.valueOf(jtfIdMateria.getText());
-        String nombre = jtfNombre.getText();
-        int año = (Integer)jsAño.getValue();
-        
-            if(!nombre.isEmpty()){
-                Materia mate = new Materia (nombre,año,true,id);
+        try {
+            int id = Integer.valueOf(jtfIdMateria.getText());
+            String nombre = jtfNombre.getText();
+            int año = (Integer) jsAño.getValue();
+
+            if (!nombre.isEmpty()) {
+                Materia mate = new Materia(nombre, año, true, id);
                 mat.actualizarMateria(mate);
-                jtfIdMateria.setText(mate.getIdMateria()+"");
-                JOptionPane.showMessageDialog(null, "Se ha actualizado su materia");
+                jtfIdMateria.setText(mate.getIdMateria() + "");
+                JOptionPane.showMessageDialog(this, "Se ha actualizado su materia");
                 jtfIdMateria.setEnabled(true);
                 jtfIdMateria.setText("");
                 jsAño.setValue(1);
                 jcEstado.setSelected(false);
                 jtfNombre.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Su materia debe tener un nombre!");
+                jtfNombre.requestFocus();
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Su materia debe tener un nombre!");
-            }
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Error al buscar alumno");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la materia");
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-        try{
-        int id = Integer.valueOf(jtfIdMateria.getText());
-        int confirmado = JOptionPane.showConfirmDialog(this,"Desea realizar la actualización");
-                if (JOptionPane.OK_OPTION == confirmado){
-                    mat.borrarMateriaLogico(id);
-                    JOptionPane.showMessageDialog(null, "Su Materia ha sido eliminada!");
-                    
-                }else{
-                    JOptionPane.showMessageDialog(this, "Se cancelo la operación");
-                }
-        jtfIdMateria.setEnabled(true);
-        jtfIdMateria.setText("");
-        jsAño.setValue(1);
-        jcEstado.setSelected(false);
-        jtfNombre.setText("");
-        jbActualizar.setEnabled(false);
-        jbBorrar.setEnabled(false);
-        jbGuardar.setEnabled(false);
-        jbLimpiar.setEnabled(false);
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Error al buscar alumno");
-        }
-        catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "No se ha encontrado su alumno");
+        try {
+            int id = Integer.valueOf(jtfIdMateria.getText());
+            int confirmado = JOptionPane.showConfirmDialog(this, "Desea realizar la actualización");
+            if (JOptionPane.OK_OPTION == confirmado) {
+                mat.borrarMateriaLogico(id);
+                JOptionPane.showMessageDialog(this, "Su Materia ha sido eliminada!");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Se cancelo la operación");
+            }
+            jtfIdMateria.setEnabled(true);
+            jtfIdMateria.setText("");
+            jsAño.setValue(1);
+            jcEstado.setSelected(false);
+            jtfNombre.setText("");
+            jbActualizar.setEnabled(false);
+            jbBorrar.setEnabled(false);
+            jbGuardar.setEnabled(false);
+            jbLimpiar.setEnabled(false);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Para borrar a un alumno se necesita el id de la materia");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Para borrar a un alumno se necesita el id de la materia");
         }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
@@ -316,12 +317,16 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jtfNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNombreFocusLost
-        if(jtfNombre.getText().length()>0){
-            jbGuardar.setEnabled(true);
+        if (!jtfIdMateria.isEnabled()) {
+            jbGuardar.setEnabled(false);
+        } else {
+            if (jtfNombre.getText().length() > 0) {
+                jbGuardar.setEnabled(true);
+            }
         }
+
     }//GEN-LAST:event_jtfNombreFocusLost
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
