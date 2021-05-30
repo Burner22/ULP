@@ -31,6 +31,7 @@ public class AlumnoData {
 
             if (rs.next()) {
                 alumno.setIdAlumno(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Alumno agregado con exito!");
             } else {
                 JOptionPane.showMessageDialog(null, "No se pudo obtener el ID del alumno");
             }
@@ -148,6 +149,7 @@ public class AlumnoData {
              
              ps.executeUpdate(); 
              ps.close();
+             JOptionPane.showMessageDialog(null, "Datos del alumno actualizados!");
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Error al actualizar un alumno: " + ex.getMessage());
          }
