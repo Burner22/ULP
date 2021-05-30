@@ -149,7 +149,7 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
                                         .addComponent(jtfIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(43, 43, 43)
                                         .addComponent(jbBuscarMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
@@ -189,7 +189,7 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
                     .addComponent(jbBorrar)
                     .addComponent(jbLimpiar)
                     .addComponent(jbSalir))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,7 +201,7 @@ public class ViewMateriaGuardar extends javax.swing.JInternalFrame {
         Materia ma = mat.buscarMateria(idMateria);
         jtfNombre.setText(ma.getNombre());
         jsAño.setValue(ma.getAño());
-        jcEstado.setSelected(!ma.getEstado());
+        jcEstado.setSelected(ma.getEstado());
         
         JOptionPane.showMessageDialog(this, "Se ha encontrado su materia");
         jtfIdMateria.setEnabled(false);
